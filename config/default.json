@@ -1,0 +1,5 @@
+{
+  "PORT": 5000,
+  "mongoUrl": "mongodb+srv://ez:ez123@cluster0.kvnop.azure.mongodb.net/chat?retryWrites=true&w=majority",
+  "jwtSecret": "ez"
+}

@@ -1,0 +1,121 @@
+.loginPage {
+  margin-top: 200px;
+  margin-left: 35%;
+  width: 30%;
+}
+.registerPage {
+  margin-top: 200px;
+  margin-left: 35%;
+  width: 30%;
+}
+.chatWindow {
+  width: 55%;
+  min-height: 600px;
+  margin: auto;
+  background-color: rgb(34, 33, 33);
+  color: white;
+  border-radius: 10px;
+}
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 65px;
+  border-bottom: 1px solid rgb(101, 34, 163);
+  margin: auto 15px;
+  h4 {
+    margin: auto;
+  }
+}
+.btn-exit {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  padding: 0;
+  margin: 5px;
+  background-color: rgb(101, 34, 163);
+  &:hover {
+    background-color: red;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgb(185, 182, 182);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(185, 182, 182, 1);
+  background-color: rgb(105, 105, 105);
+}
+.usersBar {
+  border: 2px solid rgb(101, 34, 163);
+  margin: 50px auto;
+  width: 410px;
+  height: 130px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+  a {
+    color: black;
+  }
+}
+.usersChat {
+  margin-left: 22%;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  .manager-panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    button {
+      height: 45px;
+      width: 65px;
+      margin: auto;
+      background-color: rgb(101, 34, 163);
+    }
+    input {
+      width: 85%;
+      margin: auto;
+      font-size: 25px;
+      color: white;
+    }
+  }
+  .twoUsersChat {
+    border: 2px solid rgb(101, 34, 163);
+    margin: 10px;
+    height: 470px;
+    overflow-y: auto;
+    border-radius: 10px;
+    padding: 30px;
+  }
+}
+.userLogo {
+  margin: 10px;
+  height: 80px;
+  width: 80px;
+  background-color: rgb(101, 34, 163);
+  border-radius: 50%;
+  border: 5px solid rgb(10, 238, 10);
+  .userName {
+    margin: 30%;
+    text-align: center;
+  }
+}
+.closeImg {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 90px;
+  left: 74%;
+}
+.startingText h5 {
+  text-align: center;
+}

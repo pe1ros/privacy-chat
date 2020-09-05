@@ -1,0 +1,33 @@
+{
+  "name": "mern-socketio-chat",
+  "version": "1.0.0",
+  "description": "socketio chat",
+  "main": "app.js",
+  "scripts": {
+    "server": "nodemon app.js  ",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": [
+    "mern",
+    "chat",
+    "socketio"
+  ],
+  "author": "Ilya <im.clean@yandex.ru>",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-validator": "^6.6.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.1",
+    "socket.io": "^2.3.0",
+    "socketio": "^1.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.4"
+  }
+}
