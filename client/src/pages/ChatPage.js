@@ -5,20 +5,18 @@ import { useHttp } from "../hooks/http.hook";
 import { UsersBar } from "../components/UsersBar";
 import { UsersChat } from "../components/UsersChat";
 import { useAuth } from "../hooks/auth.hook";
-import io from "socket.io-client";
 
-export const socket = io();
-
-export const ChatPage = (props) => {
-  const [users, setUsers] = useState([]);
+export const ChatPage = ({ isExsistChat }) => {
+  const [usersConnect, setUsersConnect] = useState([]);
   const { request } = useHttp();
   const [flagReload, setFlagLoad] = useState(false);
   const { userId } = useAuth();
 
   const getUsers = async () => {
     try {
+      //get all registered users array and users connections Id
       const data = await request("/api/chat/users");
-      setUsers(data);
+      setUsersConnect(data);
     } catch (error) {}
   };
 
@@ -30,14 +28,8 @@ export const ChatPage = (props) => {
     <div className="chatWindow">
       <div className="row">
         <NavBar />
-        <UsersBar isExsistChat={props.isExsistChat} users={users} />
-        {props.isExsistChat ? (
-          <UsersChat isExsistChat={props.isExsistChat} userId={userId} />
-        ) : (
-          <div className="startingText">
-            <h5>Select User for starting chat...</h5>
-          </div>
-        )}
+        <UsersBar usersConnect={usersConnect} />
+        <UsersChat />
       </div>
     </div>
   );

@@ -2,59 +2,87 @@ import React, { useState, useEffect } from "react";
 import "../style.scss";
 import { NavLink } from "react-router-dom";
 import { useHttp } from "../hooks/http.hook";
-import { socket } from "../pages/ChatPage";
 import { useAuth } from "../hooks/auth.hook";
+import io from "socket.io-client";
+import Moment from "moment";
 
-export const UsersChat = (props) => {
-  const chatId = window.location.pathname.split("/chat/")[1];
+export const socket = io();
+
+export const UsersChat = () => {
+  const { userId } = useAuth();
+  const chatId = 999;
   const [message, setMessage] = useState("");
+  const [usersChat, setUsersChat] = useState([]);
   const [messagesChat, setMessagesChat] = useState([]);
   const { request } = useHttp();
 
-  const getChatData = async () => {
+  const setChat = async () => {
     try {
-      socket.emit("CHAT:JOIN", {
-        chatId,
-        userId: props.userId,
-      });
-      await request(`/api/chat/global`);
+      await request(`/api/chat/chat`, "POST", { userId, chatId });
     } catch (error) {}
   };
-
+  const getChat = async () => {
+    try {
+      await request(`/api/chat/chat`);
+    } catch (error) {}
+  };
   const changeHandler = (event) => {
     setMessage({ ...message, [event.target.name]: event.target.value });
   };
 
-  const sendMessage = async (e) => {
+  const sendMessage = (e) => {
     e.preventDefault();
-
+    setMessagesChat([
+      ...messagesChat,
+      { chatId, userId, text: message.message, date: Date.now() },
+    ]);
+    socket.emit("NEW:MESSAGE", { chatId, userId, text: message.message });
     setMessage("");
   };
-  useEffect(() => {
-    getChatData();
-  }, []);
 
-  socket.on("USER:JOINED", (chats) => {
-    console.log(chats);
+  useEffect(() => {
+    setChat();
+    getChat();
+    socket.emit("CHAT:JOIN", { userId, chatId });
+    socket.on("GET:USERS:CHAT", (users) => {
+      setUsersChat(users);
+    });
+    socket.on("CHAT:LEAVE", (users) => {
+      setUsersChat(users);
+    });
+  }, []);
+  socket.on("CHAT:NEW:MESSAGE", (objMessage) => {
+    setMessagesChat([...messagesChat, objMessage]);
   });
+
   return (
     <div className="usersChat">
       <div className="twoUsersChat">
-        {messagesChat && (
-          <div>
-            <div>{messagesChat.date}</div>
-            <div>{messagesChat.message}</div>
-          </div>
-        )}
-      </div>
-      <div>
-        <NavLink to={"/"}>
-          <img
-            className="closeImg"
-            src="https://image.flaticon.com/icons/svg/1828/1828665.svg"
-            alt="Close"
-          />
-        </NavLink>
+        {messagesChat.map((k, i) => {
+          let styleMsg = {
+            color: "green",
+            alignSelf: "flex-start",
+            border: "1px solid green",
+            borderRadius: "10px",
+          };
+          if (k.userId === userId) {
+            styleMsg = {
+              color: "white",
+              alignSelf: "flex-end",
+              border: "1px solid white",
+              borderRadius: "10px",
+            };
+          }
+          return (
+            <div key={i} style={styleMsg}>
+              <div>UserId: {k.userId}</div>
+              <div>
+                Date: {Moment(k.date).format("MMMM Do YYYY, h:mm:ss a")}
+              </div>
+              <div>Message: {k.text}</div>
+            </div>
+          );
+        })}{" "}
       </div>
       <div className="manager-panel">
         <input
@@ -65,6 +93,7 @@ export const UsersChat = (props) => {
           name="message"
           onChange={changeHandler}
           required
+          value={message && message.message}
         />
         <button onClick={sendMessage} className="btn btn-primary">
           Send

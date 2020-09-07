@@ -10,7 +10,7 @@ export const NavBar = () => {
   const logoutHandler = (e) => {
     auth.logOut();
     window.location.reload();
-    socket.emit("forceDisconnect");
+    //socket.emit("forceDisconnect");
   };
 
   return (

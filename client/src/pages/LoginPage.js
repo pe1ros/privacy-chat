@@ -57,9 +57,9 @@ export const LoginPage = () => {
           >
             LogIn
           </button>
-          {/* <div>
+          <div>
             <div>
-              <label>You dont have account?</label>{" "}
+              <label>You dont have an account?</label>{" "}
               <NavLink
                 to="/registration"
                 className="btn green darken-4"
@@ -68,7 +68,7 @@ export const LoginPage = () => {
                 Registration
               </NavLink>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

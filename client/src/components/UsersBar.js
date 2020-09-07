@@ -5,18 +5,19 @@ import { useAuth } from "../hooks/auth.hook";
 
 export const UsersBar = (props) => {
   const { userId } = useAuth();
+  const { usersConnect } = props;
+  const connections = usersConnect.currentConnect
+    ? usersConnect.currentConnect[0]
+    : [];
+  const usersData = usersConnect.users ? usersConnect.users : [];
 
-  const users = props.users.users
-    ? props.users.users.map(
-        (u, i) =>
-          u._id !== userId && (
-            <NavLink to={`/chat/global`} key={i}>
-              <div className="userLogo">
-                <div className="userName">{u.name}</div>
-              </div>
-            </NavLink>
-          )
-      )
-    : "Users not found";
-  return !props.isExsistChat && <div className="usersBar"> {users}</div>;
+  return (
+    <div className="usersBar">
+      {connections.map((u, i) => (
+        <div key={i} className="userLogo">
+          <div className="userName">{u}</div>
+        </div>
+      ))}
+    </div>
+  );
 };

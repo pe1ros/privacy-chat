@@ -55,13 +55,14 @@
 }
 .usersBar {
   border: 2px solid rgb(101, 34, 163);
-  margin: 50px auto;
-  width: 410px;
-  height: 130px;
+  margin: 10px;
+  width: 130px;
+  height: 550px;
   border-radius: 10px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   overflow: auto;
+  float: left;
   a {
     color: black;
   }
@@ -95,6 +96,8 @@
     overflow-y: auto;
     border-radius: 10px;
     padding: 30px;
+    display: flex;
+    flex-direction: column;
   }
 }
 .userLogo {
