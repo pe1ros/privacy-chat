@@ -9,7 +9,7 @@ import { useAuth } from "../hooks/auth.hook";
 export const ChatPage = ({ isExsistChat }) => {
   const [usersConnect, setUsersConnect] = useState([]);
   const { request } = useHttp();
-  const [flagReload, setFlagLoad] = useState(false);
+  const [flagReload, setFlagReoad] = useState(false);
   const { userId } = useAuth();
 
   const getUsers = async () => {
@@ -19,17 +19,20 @@ export const ChatPage = ({ isExsistChat }) => {
       setUsersConnect(data);
     } catch (error) {}
   };
-
   useEffect(() => {
     getUsers();
   }, []);
+  useEffect(() => {
+    getUsers();
+    setFlagReoad(false);
+  }, [flagReload]);
 
   return (
     <div className="chatWindow">
       <div className="row">
         <NavBar />
         <UsersBar usersConnect={usersConnect} />
-        <UsersChat />
+        <UsersChat usersConnect={usersConnect} setFlagReoad={setFlagReoad} />
       </div>
     </div>
   );

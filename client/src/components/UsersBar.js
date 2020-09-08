@@ -9,11 +9,19 @@ export const UsersBar = (props) => {
   const connections = usersConnect.currentConnect
     ? usersConnect.currentConnect[0]
     : [];
-  const usersData = usersConnect.users ? usersConnect.users : [];
+  const users = usersConnect.users ? usersConnect.users : [];
+  const connectUserNames = [];
 
+  for (let i = 0; i < users.length; i++) {
+    for (let j = 0; j < connections.length; j++) {
+      if (users[i]._id === connections[j]) {
+        connectUserNames.push(users[i].name);
+      }
+    }
+  }
   return (
     <div className="usersBar">
-      {connections.map((u, i) => (
+      {connectUserNames.map((u, i) => (
         <div key={i} className="userLogo">
           <div className="userName">{u}</div>
         </div>

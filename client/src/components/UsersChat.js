@@ -8,22 +8,25 @@ import Moment from "moment";
 
 export const socket = io();
 
-export const UsersChat = () => {
+export const UsersChat = ({ setFlagReoad, usersConnect }) => {
   const { userId } = useAuth();
   const chatId = 999;
+  let userName = "";
+  const users = usersConnect.users ? usersConnect.users : [];
   const [message, setMessage] = useState("");
   const [usersChat, setUsersChat] = useState([]);
   const [messagesChat, setMessagesChat] = useState([]);
   const { request } = useHttp();
 
+  for (let i = 0; i < users.length; i++) {
+    if (users[i]._id === userId) {
+      userName = users[i].name;
+    }
+  }
+
   const setChat = async () => {
     try {
       await request(`/api/chat/chat`, "POST", { userId, chatId });
-    } catch (error) {}
-  };
-  const getChat = async () => {
-    try {
-      await request(`/api/chat/chat`);
     } catch (error) {}
   };
   const changeHandler = (event) => {
@@ -34,21 +37,27 @@ export const UsersChat = () => {
     e.preventDefault();
     setMessagesChat([
       ...messagesChat,
-      { chatId, userId, text: message.message, date: Date.now() },
+      { chatId, userId, text: message.message, userName },
     ]);
-    socket.emit("NEW:MESSAGE", { chatId, userId, text: message.message });
+    socket.emit("NEW:MESSAGE", {
+      chatId,
+      userId,
+      text: message.message,
+      userName,
+    });
     setMessage("");
   };
 
   useEffect(() => {
     setChat();
-    getChat();
     socket.emit("CHAT:JOIN", { userId, chatId });
     socket.on("GET:USERS:CHAT", (users) => {
       setUsersChat(users);
+      setFlagReoad(true);
     });
     socket.on("CHAT:LEAVE", (users) => {
       setUsersChat(users);
+      setFlagReoad(true);
     });
   }, []);
   socket.on("CHAT:NEW:MESSAGE", (objMessage) => {
@@ -75,7 +84,7 @@ export const UsersChat = () => {
           }
           return (
             <div key={i} style={styleMsg}>
-              <div>UserId: {k.userId}</div>
+              <div>User Name: {k.userName}</div>
               <div>
                 Date: {Moment(k.date).format("MMMM Do YYYY, h:mm:ss a")}
               </div>

@@ -35,16 +35,16 @@ router.post("/chat", async (req, res) => {
   res.send();
 });
 
-router.get("/chat", async (req, res) => {
-  const { id: chatId } = req.params;
-  const objUsers = chats.has(chatId)
-    ? {
-        users: [...chats.get(chatId).get("users").values()],
-        messages: [...chats.get(chatId).get("messages").values()],
-      }
-    : { users: [], messages: [] };
-  res.json(objUsers);
-});
+// router.get("/chat", async (req, res) => {
+//   const { id: chatId } = req.params;
+//   const objUsers = chats.has(chatId)
+//     ? {
+//         users: [...chats.get(chatId).get("users").values()],
+//         messages: [...chats.get(chatId).get("messages").values()],
+//       }
+//     : { users: [], messages: [] };
+//   res.json(objUsers);
+// });
 
 module.exports = router;
 module.exports.chats = chats;
