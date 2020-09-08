@@ -21,6 +21,7 @@ export const UsersBar = (props) => {
   }
   return (
     <div className="usersBar">
+      <div>Users online: ({connectUserNames.length})</div>
       {connectUserNames.map((u, i) => (
         <div key={i} className="userLogo">
           <div className="userName">{u}</div>

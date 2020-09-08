@@ -59,6 +59,7 @@ router.post(
           .status(500)
           .json({ message: "User not found or enter right email" });
       }
+      // i need set bcrypt password and validate here
       const isMatch = await bcrypt.compare(password, user.password);
       if (isMatch) {
         return res.status(500).json({ message: "password is wrong" });

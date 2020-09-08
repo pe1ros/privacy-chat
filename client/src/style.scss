@@ -104,12 +104,13 @@
   margin: 10px;
   height: 80px;
   width: 80px;
-  background-color: rgb(101, 34, 163);
+  background-color: rgb(54, 54, 54);
   border-radius: 50%;
   border: 5px solid rgb(10, 238, 10);
   .userName {
     margin: 30%;
     text-align: center;
+    color: white;
   }
 }
 .closeImg {
@@ -119,6 +120,13 @@
   top: 90px;
   left: 74%;
 }
-.startingText h5 {
-  text-align: center;
+.registrationBlock {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 250px;
+  label {
+    font-size: 15px;
+    color: rgb(95, 95, 95);
+  }
 }

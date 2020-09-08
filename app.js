@@ -34,8 +34,8 @@ async function start() {
         currentConnect.length = 0;
         currentConnect.push(users);
       });
-      socket.on("NEW:MESSAGE", ({ chatId, userId, text, userName }) => {
-        const objMessage = { chatId, userId, text, userName, date: Date.now() };
+      socket.on("NEW:MESSAGE", ({ chatId, userId, text, userName, date }) => {
+        const objMessage = { chatId, userId, text, userName, date };
         chats.chats.get(chatId).get("messages").push(objMessage);
         socket.to(chatId).broadcast.emit("CHAT:NEW:MESSAGE", objMessage);
       });

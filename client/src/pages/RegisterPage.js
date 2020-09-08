@@ -59,11 +59,11 @@ export const RegisterPage = () => {
           />
           <label htmlFor="password">Password</label>
         </div>
-        <div className=" card-action">
+        <div className="registrationBlock card-action">
           <button
             onClick={registerHandler}
             disabled={loading}
-            className="btn green darken-4"
+            className="btn blue darken-4"
           >
             Registration
           </button>

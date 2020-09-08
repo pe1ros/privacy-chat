@@ -37,13 +37,14 @@ export const UsersChat = ({ setFlagReoad, usersConnect }) => {
     e.preventDefault();
     setMessagesChat([
       ...messagesChat,
-      { chatId, userId, text: message.message, userName },
+      { chatId, userId, text: message.message, userName, date: Date.now() },
     ]);
     socket.emit("NEW:MESSAGE", {
       chatId,
       userId,
       text: message.message,
       userName,
+      date: Date.now(),
     });
     setMessage("");
   };
@@ -73,6 +74,7 @@ export const UsersChat = ({ setFlagReoad, usersConnect }) => {
             alignSelf: "flex-start",
             border: "1px solid green",
             borderRadius: "10px",
+            margin: "3px",
           };
           if (k.userId === userId) {
             styleMsg = {
@@ -80,6 +82,7 @@ export const UsersChat = ({ setFlagReoad, usersConnect }) => {
               alignSelf: "flex-end",
               border: "1px solid white",
               borderRadius: "10px",
+              margin: "3px",
             };
           }
           return (

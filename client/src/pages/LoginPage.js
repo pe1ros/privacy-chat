@@ -49,20 +49,20 @@ export const LoginPage = () => {
           />
           <label htmlFor="password">Password</label>
         </div>
-        <div className="col card-action">
+        <div className="col card-action registrationBlock">
           <button
-            className="btn blue darken-4"
+            className="btn green darken-4"
             onClick={loginHandler}
             disabled={loading}
           >
             LogIn
           </button>
           <div>
-            <div>
+            <div className="registrationBlock">
               <label>You dont have an account?</label>{" "}
               <NavLink
                 to="/registration"
-                className="btn green darken-4"
+                className="btn blue darken-4"
                 disabled={loading}
               >
                 Registration
