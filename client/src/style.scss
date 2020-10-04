@@ -130,3 +130,62 @@
     color: rgb(95, 95, 95);
   }
 }
+@media screen and (max-width: 375px) {
+  .chatWindow {
+    width: 100%;
+    min-height: 560px;
+  }
+  .usersBar {
+    width: 90%;
+    height: 75px;
+    display: flex;
+    flex-direction: row;
+    order: 1;
+    &__online {
+      display: none;
+    }
+  }
+  .userLogo {
+    margin: 0;
+    width: 60px;
+    height: 60px;
+  }
+  .usersChat {
+    order: 2;
+    float: right;
+    .twoUsersChat {
+      height: 570px;
+    }
+  }
+  .row {
+    margin: 0;
+  }
+}
+@media screen and (max-width: 350px) {
+  .chatWindow {
+    width: 100%;
+    height: 100%;
+  }
+  .usersBar {
+    width: 90%;
+    height: 65px;
+    display: flex;
+    flex-direction: row;
+    order: 1;
+    &__online {
+      display: none;
+    }
+  }
+  .userLogo {
+    margin: 0;
+    width: 60px;
+    height: 60px;
+  }
+  .usersChat {
+    order: 2;
+    float: right;
+    .twoUsersChat {
+      height: 330px;
+    }
+  }
+}

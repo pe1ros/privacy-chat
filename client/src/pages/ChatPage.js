@@ -10,6 +10,7 @@ export const ChatPage = ({ isExsistChat }) => {
   const [usersConnect, setUsersConnect] = useState([]);
   const { request } = useHttp();
   const [flagReload, setFlagReoad] = useState(false);
+
   const { userId } = useAuth();
 
   const getUsers = async () => {

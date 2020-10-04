@@ -12,7 +12,7 @@ export const UsersChat = ({ setFlagReoad, usersConnect }) => {
   const { userId } = useAuth();
   const chatId = 999;
   let userName = "";
-  const users = usersConnect.users ? usersConnect.users : [];
+  const users = usersConnect.users || [];
   const [message, setMessage] = useState("");
   const [usersChat, setUsersChat] = useState([]);
   const [messagesChat, setMessagesChat] = useState([]);
